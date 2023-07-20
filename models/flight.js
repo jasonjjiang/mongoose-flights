@@ -1,27 +1,24 @@
 const mongoose = require('mongoose');
-// optional shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema;
 
 const destinationSchema = new Schema({ 
     airport: {
         type: String,
-        enum: ['DFW', 'ATL', 'MIA']
+        enum: ['ORD', 'JFK', 'SFO', 'LAX', 'DFW', 'MIA']
     },
     arrival: {
         type: Date
-    }
-}, {
-    timestamps: true
-})
+    },
+});
 
 const flightSchema = new Schema({
     airline: {
         type: String,
-        enum: ['American Airlines', 'Southwest', 'United']
+        enum: ['American Airlines', 'Southwest Airlines', 'United Airlines', 'Delta Airlines', 'Spirit' ]
     },
     airport: {
         type: String,
-        enum: ['LAX', 'JFK', 'ORD' ]
+        enum: ['ORD', 'JFK', 'SFO', 'LAX', 'DFW', 'MIA']
     },
     flightNo: {
         type:Number,
@@ -29,11 +26,12 @@ const flightSchema = new Schema({
         max:9999
     },
     departs: {
-        type: Date
+        type: Date,
+        min: Date.now()
     },
     destinations: {type: [destinationSchema], default: []}
 }, {
-    timestamps: true
-})
+   
+});
 
 module.exports = mongoose.model('Flight', flightSchema)

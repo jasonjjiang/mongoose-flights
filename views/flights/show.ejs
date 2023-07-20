@@ -1,46 +1,71 @@
+<%- include('../partials/header') %>
+<section id="show-page">
+    <div>Airline: <%= flight.airline %></div>
+    <div>Departure Airport: <%= flight.airport %></div>
+    <div>Flight Number: <%= flight.flightNo %></div>
+    <div>Departure Date & Time: <%= flight.departs %></div>
+    <a href="/flights/<%= flight._id %>/tickets/new"><button>Add Ticket</button></a> 
 </section>
-<!-- new markup below -->
-<br><br><h2>Destinations</h2>
-<form id="add-destination-form" method="POST"
-  action="/flights/<%= flight._id %>/destinations">
-  <label>Review:</label>
-  <textarea name="content"></textarea>
-  <label>Rating:</label>
-  <select name="rating">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5" selected>5</option>
-  </select>
-  <input type="submit" value="Add Destination">
-</form>
 
-<% if(flight.destinations.length) { %>
+<% if (ticket.length > 0) { %>
   <table>
     <thead>
       <tr>
-        <th>Date</th>
-        <th>Destination</th>
-        <th>Rating</th>
+        <th>Seat</th>
+        <th>Price</th>
       </tr>
     </thead>
     <tbody>
-      <% flight.destinations.forEach(function(r) { %>
+      <% ticket.forEach(function(t) { %>
         <tr>
-          <!-- .toLocaleDateString() provides a more friendly date format -->
-          <td><%= r.createdAt.toLocaleDateString() %></td>
-          <td><%= r.content %></td>
-          <td><%= r.rating %></td>
+          <td><%= t.seat %></td>
+          <td><%= t.price %></td>
         </tr>
       <% }); %>
     </tbody>
   </table>
-
-  <% } else { %>
-
-    <h5>No Destinations Yet</h5>
-
+<% } else { %>
+  <h5>No ticket information to be found. Try adding a ticket.</h5>
 <% } %>
 
-<% include('../partials/footer') %>
+<br><br><h2>Add a Destinations</h2>
+<form id="add-destination-form" method="POST"
+  action="/flights/<%= flight._id %>/destinations">
+  <label>Airport:</label>
+  <select name="airport">
+    <option value="ORD">ORD</option>
+    <option value="JFK">JFK</option>
+    <option value="SFO">SFO</option>
+    <option value="LAX">LAX</option>
+    <option value="DFW">DFW</option> 
+    <option value="MIA">MIA</option> 
+</select>
+  <label>Arrival Date & Time:</label>
+  <input type="date" name="Destination">
+  <input type="submit" value="Add Destination">
+</form>
+
+<% if (flight.destinations.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Destination Airport</th>
+          &nbsp;|&nbsp;
+          <th>Destination Date</th>
+        </tr>
+      </thead>
+      <tbody> 
+      <% flight.destinations.forEach(function(a) { %>
+        <tr>
+          <td><%= a.airport %></td>
+         
+          <td><%= a.arrival %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <h5>No destination information to be found. Try adding a destination.</h5>
+    <% } %>
+
+<%- include('../partials/footer') %>
