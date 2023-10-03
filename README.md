@@ -2,9 +2,7 @@
 This is a flight management app built with Express, Express Generator, and Mongoose. It allows users to add and display flights in a table.
 
 # Features
-Add new flights with airline, airport, flight number, and departure date
-Display all flights in a table with sortable columns
-Highlight flights that have already departed
+Add new flights with airline, airport, flight number, and departure date.
 
 # Prerequisites
 Node.js and npm should be installed on your machine
