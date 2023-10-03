@@ -36,8 +36,11 @@ Click on the table headers to sort the flights based on the respective column.
 
 # Technologies Used
 Express.js: Fast, unopinionated, minimalist web framework for Node.js
+
 Express Generator: Express application generator
+
 Mongoose: MongoDB object modeling for Node.js
+
 HTML, CSS, JavaScript: Front-end development
 
 
